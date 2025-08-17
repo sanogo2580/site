@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeAuto - Vente de voitures haut de gamme</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    
+    .car-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .brand-logo {
+      transition: all 0.3s ease;
+      filter: grayscale(100%);
+      opacity: 0.7;
+    }
+    
+    .brand-logo:hover {
+      filter: grayscale(0);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    .social-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 1.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .slide-in-left {
+      animation: slideInLeft 1s ease-out;
+    }
+    
+    @keyframes slideInLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .slide-in-right {
+      animation: slideInRight 1s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    .btn-glow:hover::after {
+      left: 100%;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navigation -->
+  <nav class="bg-black text-white py-4 px-6 fixed w-full z-50 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-car text-2xl text-yellow-400"></i>
+        <span class="text-2xl font-bold">Luxe<span class="text-yellow-400">Auto</span></span>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#accueil" class="hover:text-yellow-400 transition duration-300">Accueil</a>
+        <a href="#inventaire" class="hover:text-yellow-400 transition duration-300">Inventaire</a>
+        <a href="#services" class="hover:text-yellow-400 transition duration-300">Services</a>
+        <a href="#a-propos" class="hover:text-yellow-400 transition duration-300">À propos</a>
+        <a href="#contact" class="hover:text-yellow-400 transition duration-300">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-2xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black py-4 px-6 absolute w-full left-0 mt-4">
+      <div class="flex flex-col space-y-4">
+        <a href="#accueil" class="hover:text-yellow-400 transition duration-300">Accueil</a>
+        <a href="#inventaire" class="hover:text-yellow-400 transition duration-300">Inventaire</a>
+        <a href="#services" class="hover:text-yellow-400 transition duration-300">Services</a>
+        <a href="#a-propos" class="hover:text-yellow-400 transition duration-300">À propos</a>
+        <a href="#contact" class="hover:text-yellow-400 transition duration-300">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="accueil" class="hero min-h-screen flex items-center justify-center text-white relative pt-16">
+    <div class="container mx-auto px-6 text-center animate__animated animate__fadeIn">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 slide-in-left">Luxe<span class="text-yellow-400">Auto</span></h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto slide-in-right">Conduisez l'excellence. Découvrez nos marques prestigieuses.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="#inventaire" class="btn-glow bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+          Explorer notre collection
+        </a>
+        <a href="#contact" class="btn-glow bg-transparent border-2 border-white hover:bg-white hover:text-black font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+          Nous contacter
+        </a>
+      </div>
+      <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+        <a href="#inventaire" class="text-white animate-bounce">
+          <i class="fas fa-chevron-down text-3xl"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Introduction Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Des voitures d'exception à portée de main</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Chez LuxeAuto, nous vous proposons une sélection soigneusement choisie des plus grandes marques de voitures de luxe. 
+          BMW, Mercedes, Audi, Lamborghini, Ferrari, et plus encore. Faites votre choix, personnalisez votre commande, 
+          et nous nous occupons du reste avec une expertise inégalée.
+        </p>
+      </div>
+      
+      <!-- Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div class="bg-gray-100 p-8 rounded-lg text-center hover:shadow-xl transition duration-500">
+          <div class="text-5xl font-bold text-yellow-500 mb-4">15+</div>
+          <h3 class="text-xl font-semibold mb-2">Marques prestigieuses</h3>
+          <p class="text-gray-600">Les plus grands constructeurs automobiles mondiaux</p>
+        </div>
+        <div class="bg-gray-100 p-8 rounded-lg text-center hover:shadow-xl transition duration-500">
+          <div class="text-5xl font-bold text-yellow-500 mb-4">200+</div>
+          <h3 class="text-xl font-semibold mb-2">Véhicules disponibles</h3>
+          <p class="text-gray-600">Un large choix de modèles neufs et d'occasion</p>
+        </div>
+        <div class="bg-gray-100 p-8 rounded-lg text-center hover:shadow-xl transition duration-500">
+          <div class="text-5xl font-bold text-yellow-500 mb-4">98%</div>
+          <h3 class="text-xl font-semibold mb-2">Clients satisfaits</h3>
+          <p class="text-gray-600">Notre engagement pour votre satisfaction totale</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inventory Section -->
+  <section id="inventaire" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Notre Sélection Exclusive</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Découvrez notre collection de véhicules haut de gamme soigneusement sélectionnés pour leur qualité, 
+          leur performance et leur élégance intemporelle.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Car 1 -->
+        <div class="car-card bg-white rounded-lg overflow-hidden shadow-md transition duration-500 hover:shadow-xl">
+          <div class="relative overflow-hidden h-64">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                 alt="BMW M5" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            <div class="absolute top-4 right-4 bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">
+              Nouveau
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">BMW M5 Competition</h3>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-gray-600">2023 • 4.4L V8 • 625ch</span>
+              <span class="text-lg font-bold">€120,000</span>
+            </div>
+            <div class="flex justify-between text-gray-500 text-sm mb-4">
+              <span><i class="fas fa-tachometer-alt mr-1"></i> 8,000 km</span>
+              <span><i class="fas fa-gas-pump mr-1"></i> Essence</span>
+              <span><i class="fas fa-car mr-1"></i> Automatique</span>
+            </div>
+            <button class="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-300">
+              Voir détails <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Car 2 -->
+        <div class="car-card bg-white rounded-lg overflow-hidden shadow-md transition duration-500 hover:shadow-xl">
+          <div class="relative overflow-hidden h-64">
+            <img src="https://images.unsplash.com/photo-1555626906-fcf10d6851b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Mercedes AMG GT" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+              Promotion
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Mercedes-AMG GT R</h3>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-gray-600">2022 • 4.0L V8 • 585ch</span>
+              <span class="text-lg font-bold">€185,000</span>
+            </div>
+            <div class="flex justify-between text-gray-500 text-sm mb-4">
+              <span><i class="fas fa-tachometer-alt mr-1"></i> 12,500 km</span>
+              <span><i class="fas fa-gas-pump mr-1"></i> Essence</span>
+              <span><i class="fas fa-car mr-1"></i> Automatique</span>
+            </div>
+            <button class="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-300">
+              Voir détails <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Car 3 -->
+        <div class="car-card bg-white rounded-lg overflow-hidden shadow-md transition duration-500 hover:shadow-xl">
+          <div class="relative overflow-hidden h-64">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Audi R8" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Audi R8 V10 Plus</h3>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-gray-600">2021 • 5.2L V10 • 620ch</span>
+              <span class="text-lg font-bold">€210,000</span>
+            </div>
+            <div class="flex justify-between text-gray-500 text-sm mb-4">
+              <span><i class="fas fa-tachometer-alt mr-1"></i> 9,800 km</span>
+              <span><i class="fas fa-gas-pump mr-1"></i> Essence</span>
+              <span><i class="fas fa-car mr-1"></i> Automatique</span>
+            </div>
+            <button class="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-300">
+              Voir détails <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="#" class="inline-block border-2 border-black text-black font-bold py-3 px-8 rounded-full hover:bg-black hover:text-white transition duration-300">
+          Voir toute la collection <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Nos Partenaires Prestigieux</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Nous collaborons avec les plus grands noms de l'automobile pour vous offrir des véhicules d'exception.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/1200px-BMW.svg.png" alt="BMW" class="brand-logo h-16 mx-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/1200px-Mercedes-Logo.svg.png" alt="Mercedes" class="brand-logo h-12 mx-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Audi-Logo_2016.svg/1200px-Audi-Logo_2016.svg.png" alt="Audi" class="brand-logo h-12 mx-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Lamborghini_Logo.svg/1200px-Lamborghini_Logo.svg.png" alt="Lamborghini" class="brand-logo h-12 mx-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ferrari_Logo.svg/1200px-Ferrari_Logo.svg.png" alt="Ferrari" class="brand-logo h-12 mx-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Nos Services Exclusifs</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          LuxeAuto va au-delà de la simple vente de véhicules. Nous offrons une expérience client complète et sur mesure.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Recherche Personnalisée</h3>
+          <p class="text-gray-600">
+            Notre équipe d'experts trouve le véhicule parfait selon vos critères spécifiques, où qu'il se trouve dans le monde.
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-euro-sign"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Financement Sur Mesure</h3>
+          <p class="text-gray-600">
+            Solutions de financement adaptées à votre situation avec nos partenaires bancaires privilégiés.
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Garantie Étendue</h3>
+          <p class="text-gray-600">
+            Protection complète de votre véhicule avec nos garanties prolongées couvrant tous les composants.
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-car-crash"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Contrôle Technique Approfondi</h3>
+          <p class="text-gray-600">
+            Inspection minutieuse de chaque véhicule par nos techniciens certifiés avant toute transaction.
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Reprise de Votre Véhicule</h3>
+          <p class="text-gray-600">
+            Estimation juste et reprise de votre ancien véhicule au meilleur prix du marché.
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-500">
+          <div class="text-yellow-500 text-4xl mb-4">
+            <i class="fas fa-concierge-bell"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-4">Service Après-Vente Premium</h3>
+          <p class="text-gray-600">
+            Accompagnement personnalisé et assistance 24/7 pour tous nos clients après l'achat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-black text-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Témoignages de Nos Clients</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-300 max-w-3xl mx-auto text-lg">
+          Découvrez ce que nos clients disent de leur expérience avec LuxeAuto.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-900 p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-500 text-2xl mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-6">
+            "L'équipe de LuxeAuto a trouvé exactement la Porsche 911 que je recherchais. Le processus d'achat a été fluide et professionnel. Je recommande vivement leurs services."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold">Jean Dupont</h4>
+              <p class="text-gray-400 text-sm">Directeur Marketing</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900 p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-500 text-2xl mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-6">
+            "Service client exceptionnel ! Ils ont répondu à toutes mes questions et m'ont guidé tout au long du processus. Mon Audi RS6 est exactement comme décrit."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold">Sophie Martin</h4>
+              <p class="text-gray-400 text-sm">Entrepreneure</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900 p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-500 text-2xl mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-6">
+            "J'ai acheté ma première voiture de luxe chez LuxeAuto. L'expérience a été à la hauteur de mes attentes. Le seul bémol: le délai de livraison un peu long."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold">Thomas Leroy</h4>
+              <p class="text-gray-400 text-sm">Médecin</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="a-propos" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Notre Histoire</h2>
+          <div class="w-20 h-1 bg-yellow-500 mb-8"></div>
+          <p class="text-gray-600 mb-6">
+            Fondée en 2010, LuxeAuto est née de la passion partagée de ses fondateurs pour les automobiles haut de gamme et du constat d'un manque de services premium dans le secteur.
+          </p>
+          <p class="text-gray-600 mb-6">
+            Aujourd'hui, avec plus de 10 ans d'expérience, nous avons développé un réseau international de fournisseurs et de partenaires nous permettant de proposer les véhicules les plus exclusifs à une clientèle exigeante.
+          </p>
+          <p class="text-gray-600 mb-8">
+            Notre philosophie repose sur trois piliers : l'expertise technique, la transparence absolue et le service client d'exception.
+          </p>
+          <div class="flex space-x-4">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-yellow-500">10+</div>
+              <div class="text-gray-600">Années d'expérience</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-yellow-500">50+</div>
+              <div class="text-gray-600">Employés dédiés</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-yellow-500">1000+</div>
+              <div class="text-gray-600">Clients satisfaits</div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 relative">
+          <div class="relative rounded-lg overflow-hidden shadow-xl">
+            <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                 alt="Showroom LuxeAuto" class="w-full h-auto">
+            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+              <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-full flex items-center transition duration-300">
+                <i class="fas fa-play mr-2"></i> Voir notre showroom
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Contactez Notre Équipe</h2>
+        <div class="w-20 h-1 bg-yellow-500 mx-auto mb-8"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Prêt à trouver votre prochain véhicule de rêve ? Notre équipe d'experts est à votre disposition pour répondre à toutes vos questions.
+        </p>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row">
+        <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+          <form class="bg-white p-8 rounded-lg shadow-md">
+            <div class="mb-6">
+              <label for="name" class="block text-gray-700 font-bold mb-2">Nom complet</label>
+              <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            </div>
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+              <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            </div>
+            <div class="mb-6">
+              <label for="phone" class="block text-gray-700 font-bold mb-2">Téléphone</label>
+              <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
+              <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition duration-300 font-bold">
+              Envoyer le message <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+        
+        <div class="lg:w-1/2">
+          <div class="bg-white p-8 rounded-lg shadow-md h-full">
+            <h3 class="text-2xl font-bold mb-6">Nos Coordonnées</h3>
+            
+            <div class="flex items-start mb-8">
+              <div class="text-yellow-500 text-2xl mr-4">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-bold mb-1">Adresse</h4>
+                <p class="text-gray-600">123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start mb-8">
+              <div class="text-yellow-500 text-2xl mr-4">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-bold mb-1">Téléphone</h4>
+                <p class="text-gray-600">+225 0544979531</p>
+                <p class="text-gray-600">Ligne directe : +225 012345678</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start mb-8">
+              <div class="text-yellow-500 text-2xl mr-4">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h4 class="font-bold mb-1">Email</h4>
+                <p class="text-gray-600">contact@luxeauto.com</p>
+                <p class="text-gray-600">ventes@luxeauto.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="text-yellow-500 text-2xl mr-4">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <h4 class="font-bold mb-1">Heures d'ouverture</h4>
+                <p class="text-gray-600">Lundi - Vendredi : 9h - 19h</p>
+                <p class="text-gray-600">Samedi : 10h - 18h</p>
+                <p class="text-gray-600">Dimanche : Fermé</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="py-12 bg-black text-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Suivez-Nous sur les Réseaux Sociaux</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">
+          Découvrez nos dernières arrivées, promotions exclusives et coulisses de notre showroom.
+        </p>
+      </div>
+      
+      <div class="flex justify-center space-x-6">
+        <a href="#" class="social-icon bg-blue-600 hover:bg-blue-700 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition duration-300">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="social-icon bg-blue-400 hover:bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition duration-300">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="social-icon bg-pink-600 hover:bg-pink-700 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition duration-300">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="social-icon bg-red-600 hover:bg-red-700 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition duration-300">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://wa.me/2250544979531?text=Bonjour%20LuxeAuto%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%E2%80%99achat%20d%E2%80%99une%20voiture%20de%20luxe.%20Pourriez-vous%20m%E2%80%99accompagner%20dans%20le%20choix%20et%20la%20commande%20d%E2%80%99un%20mod%C3%A8le%20%3F" 
+           class="social-icon bg-green-500 hover:bg-green-600 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition duration-300">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-12 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Abonnez-vous à Notre Newsletter</h2>
+        <p class="text-gray-300 mb-8">
+          Recevez en exclusivité nos offres spéciales, les nouveaux arrivages et les événements VIP.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+          <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black">
+          <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg transition duration-300">
+            S'abonner <i class="fas fa-paper-plane ml-2"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-8">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <i class="fas fa-car text-2xl text-yellow-400"></i>
+          <span class="text-xl font-bold text-white">Luxe<span class="text-yellow-400">Auto</span></span>
+        </div>
+        <div class="text-sm mb-4 md:mb-0">
+          &copy; 2025 LuxeAuto. Tous droits réservés.
+        </div>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-white transition duration-300">Mentions légales</a>
+          <a href="#" class="hover:text-white transition duration-300">Politique de confidentialité</a>
+          <a href="#" class="hover:text-white transition duration-300">Conditions générales</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" id="back-to-top" class="fixed bottom-8 right-8 bg-yellow-500 text-black w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg transition duration-300 opacity-0 invisible hover:bg-yellow-600">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible');
+        backToTopBtn.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopBtn.classList.remove('opacity-100', 'visible');
+        backToTopBtn.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    // Smooth scrolling for all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // Animation on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateX(0)';
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+  </script>
+</body>
+</html>

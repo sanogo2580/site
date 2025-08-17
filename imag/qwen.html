@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LuxeAuto - Vente de voitures haut de gamme</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+    
+    :root {
+      --primary: #0a192f;
+      --secondary: #112e51;
+      --accent: #d4af37;
+      --light: #f8f9fa;
+      --dark: #0a0a0a;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--primary);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--dark);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      border: 2px solid var(--accent);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      width: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+    }
+    
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+    
+    /* === Header Hero === */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)), url('https://placehold.co/1920x1080/112e51/ffffff?text=Luxe+Automobiles') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), transparent);
+      animation: wave 10s linear infinite;
+    }
+    
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-content h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards 0.3s;
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards 0.6s;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards 0.9s;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* === Introduction === */
+    .intro {
+      padding: 6rem 0;
+      background-color: var(--secondary);
+      position: relative;
+    }
+    
+    .intro::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+    
+    .intro h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .intro h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    
+    .intro p {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    
+    /* === Partenaires === */
+    .partenaires {
+      padding: 6rem 0;
+      background-color: var(--primary);
+    }
+    
+    .partenaires h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .partenaires h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    
+    .logos img {
+      height: 60px;
+      filter: grayscale(100%) brightness(0.7);
+      transition: var(--transition);
+      opacity: 0.7;
+    }
+    
+    .logos img:hover {
+      filter: grayscale(0%) brightness(1);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    /* === Voitures en vedette === */
+    .featured-cars {
+      padding: 6rem 0;
+      background: linear-gradient(to bottom, var(--secondary), var(--primary));
+    }
+    
+    .featured-cars h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .featured-cars h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+    }
+    
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .car-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    
+    .car-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent);
+    }
+    
+    .car-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .car-card:hover .car-image img {
+      transform: scale(1.1);
+    }
+    
+    .car-info {
+      padding: 1.5rem;
+    }
+    
+    .car-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    
+    .car-info .price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      color: white;
+    }
+    
+    .car-features {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    
+    .car-features span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* === Contact Rapide === */
+    .contact-rapide {
+      padding: 4rem 0;
+      background-color: var(--secondary);
+      text-align: center;
+    }
+    
+    .contact-rapide h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-rapide p {
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    
+    /* === Réseaux Sociaux === */
+    .reseaux {
+      padding: 4rem 0;
+      background-color: var(--primary);
+      text-align: center;
+    }
+    
+    .reseaux h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .social-icons a:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    }
+    
+    .facebook:hover { background: #3b5998; color: white; }
+    .twitter:hover { background: #1da1f2; color: white; }
+    .instagram:hover { background: #e1306c; color: white; }
+    .youtube:hover { background: #ff0000; color: white; }
+    .whatsapp:hover { background: #25d366; color: white; }
+    
+    /* === Footer === */
+    footer {
+      padding: 3rem 0;
+      background-color: var(--dark);
+      text-align: center;
+      font-size: 1rem;
+      color: #aaa;
+    }
+    
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* === Navigation === */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 25, 47, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      position: relative;
+    }
+    
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    
+    .logo:hover::after {
+      width: 100%;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* === Animations === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* === Responsive Design === */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 25, 47, 0.95);
+        flex-direction: column;
+        gap: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: var(--transition);
+      }
+      
+      .nav-links.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      
+      .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .intro h2, .partenaires h2, .featured-cars h2, .contact-rapide h2, .reseaux h2 {
+        font-size: 2rem;
+      }
+      
+      .logos {
+        gap: 1.5rem;
+      }
+      
+      .logos img {
+        height: 40px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .container {
+        padding: 0 1.5rem;
+      }
+      
+      .social-icons {
+        gap: 1rem;
+      }
+      
+      .social-icons a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- === Navigation === -->
+  <nav>
+    <div class="container nav-container">
+      <a href="#" class="logo">LuxeAuto</a>
+      <button class="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#voitures">Voitures</a>
+        <a href="#services">Services</a>
+        <a href="#a-propos">À Propos</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- === En-tête principal avec bannière === -->
+  <header class="hero" id="accueil">
+    <div class="hero-content">
+      <h1>LuxeAuto</h1>
+      <p>Conduisez l'excellence. Découvrez nos marques prestigieuses.</p>
+      <div class="hero-buttons">
+        <a href="#voitures" class="btn">Découvrir nos voitures</a>
+        <a href="#contact" class="btn btn-outline">Nous contacter</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- === Section d'introduction === -->
+  <section class="intro">
+    <div class="container">
+      <h2>Des voitures d'exception à portée de main</h2>
+      <p>
+        Nous vous proposons une sélection soigneusement choisie des plus grandes marques de voitures de luxe : 
+        BMW, Mercedes, Audi, Lamborghini, Ferrari, et plus encore. Faites votre choix, personnalisez votre commande, 
+        et nous nous occupons du reste. Notre expertise et notre réseau exclusif vous garantissent les meilleures 
+        conditions d'achat et un service personnalisé à chaque étape.
+      </p>
+    </div>
+  </section>
+
+  <!-- === Voitures en vedette === -->
+  <section class="featured-cars" id="voitures">
+    <div class="container">
+      <h2>Nos Voitures en Vedette</h2>
+      <div class="cars-grid">
+        <div class="car-card fade-in">
+          <div class="car-image">
+            <img src="https://placehold.co/600x400/112e51/ffffff?text=Lamborghini+Aventador" alt="Lamborghini Aventador">
+          </div>
+          <div class="car-info">
+            <h3>Lamborghini Aventador</h3>
+            <p>Voiture de sport italienne ultra-performante avec moteur V12 de 770 chevaux.</p>
+            <div class="price">750 000 €</div>
+            <div class="car-features">
+              <span><i class="fas fa-tachometer-alt"></i> 350 km/h</span>
+              <span><i class="fas fa-gas-pump"></i> Essence</span>
+              <span><i class="fas fa-cogs"></i> 750 CV</span>
+            </div>
+            <a href="#contact" class="btn btn-outline" style="width: 100%; margin-top: 1rem;">En savoir plus</a>
+          </div>
+        </div>
+        
+        <div class="car-card fade-in">
+          <div class="car-image">
+            <img src="https://placehold.co/600x400/112e51/ffffff?text=Mercedes+AMG+GT" alt="Mercedes AMG GT">
+          </div>
+          <div class="car-info">
+            <h3>Mercedes AMG GT</h3>
+            <p>Grande routière allemande combinant luxe, confort et performances exceptionnelles.</p>
+            <div class="price">180 000 €</div>
+            <div class="car-features">
+              <span><i class="fas fa-tachometer-alt"></i> 318 km/h</span>
+              <span><i class="fas fa-gas-pump"></i> Essence</span>
+              <span><i class="fas fa-cogs"></i> 585 CV</span>
+            </div>
+            <a href="#contact" class="btn btn-outline" style="width: 100%; margin-top: 1rem;">En savoir plus</a>
+          </div>
+        </div>
+        
+        <div class="car-card fade-in">
+          <div class="car-image">
+            <img src="https://placehold.co/600x400/112e51/ffffff?text=Ferrari+488+GTB" alt="Ferrari 488 GTB">
+          </div>
+          <div class="car-info">
+            <h3>Ferrari 488 GTB</h3>
+            <p>Emblème de la passion italienne pour la vitesse, avec un V8 turbo de 670 chevaux.</p>
+            <div class="price">320 000 €</div>
+            <div class="car-features">
+              <span><i class="fas fa-tachometer-alt"></i> 330 km/h</span>
+              <span><i class="fas fa-gas-pump"></i> Essence</span>
+              <span><i class="fas fa-cogs"></i> 670 CV</span>
+            </div>
+            <a href="#contact" class="btn btn-outline" style="width: 100%; margin-top: 1rem;">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section partenaires === -->
+  <section class="partenaires">
+    <div class="container">
+      <h2>Nos Partenaires</h2>
+      <div class="logos">
+        <img src="https://placehold.co/200x100/112e51/ffffff?text=BMW" alt="BMW">
+        <img src="https://placehold.co/200x100/112e51/ffffff?text=Mercedes" alt="Mercedes">
+        <img src="https://placehold.co/200x100/112e51/ffffff?text=Audi" alt="Audi">
+        <img src="https://placehold.co/200x100/112e51/ffffff?text=Lamborghini" alt="Lamborghini">
+        <img src="https://placehold.co/200x100/112e51/ffffff?text=Ferrari" alt="Ferrari">
+      </div>
+    </div>
+  </section>
+
+  <!-- === Section contact rapide === -->
+  <section class="contact-rapide" id="contact">
+    <div class="container">
+      <h2>Une question ? Contactez-nous</h2>
+      <p>Email : sanogo@luxeauto.com | Téléphone : +225 0544979531</p>
+    </div>
+  </section>
+
+  <!-- === Réseaux sociaux === -->
+  <section class="reseaux">
+    <div class="container">
+      <h2>Suivez-nous</h2>
+      <div class="social-icons">
+        <a href="#" class="facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/2250544979531?text=Bonjour%20LuxeAuto%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%E2%80%99achat%20d%E2%80%99une%20voiture%20de%20luxe.%20Pourriez-vous%20m%E2%80%99accompagner%20dans%20le%20choix%20et%20la%20commande%20d%E2%80%99un%20mod%C3%A8le%20%3F" class="whatsapp" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Pied de page === -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LuxeAuto | Tous droits réservés | <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Animation des cartes de voitures
+    document.addEventListener('DOMContentLoaded', function() {
+      const carCards = document.querySelectorAll('.car-card');
+      
+      setTimeout(() => {
+        carCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 200 * index);
+        });
+      }, 1000);
+      
+      // Animation au défilement
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const checkFade = () => {
+        fadeElements.forEach(el => {
+          const elementTop = el.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            el.classList.add('visible');
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', checkFade);
+      checkFade(); // Check on load
+      
+      // Navigation mobile
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+      
+      // Fermer le menu mobile lorsqu'on clique sur un lien
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+      
+      // Effet de défilement fluide
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Changement de style de navigation au scroll
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 100) {
+          nav.style.padding = '0.5rem 0';
+        } else {
+          nav.style.padding = '1rem 0';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

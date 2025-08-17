@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commande de Voiture - LuxeAuto</title>
+  <link rel="stylesheet" href="service.css" />
+</head>
+<body>
+
+  <form id="commandeForm">
+    <h2>Commande de voiture de luxe</h2>
+
+    <label for="marque">Marque :</label>
+    <select id="marque" required>
+      <option value="">-- Sélectionnez une marque --</option>
+      <option>BMW</option>
+      <option>Mercedes</option>
+      <option>Audi</option>
+      <option>Ferrari</option>
+      <option>Lamborghini</option>
+      <option>Porsche</option>
+      <option>Bentley</option>
+      <option>Rolls-Royce</option>
+      <option>Maserati</option>
+      <option>McLaren</option>
+    </select>
+
+    <label for="modele">Modèle :</label>
+    <select id="modele" required>
+      <option value="">-- Choisissez d'abord une marque --</option>
+    </select>
+
+    <div class="model-details" id="details">
+      <h3 id="nom-modele"></h3>
+      <p><strong>Prix :</strong> <span id="prix"></span></p>
+      <p><strong>Carburant :</strong> <span id="carburant"></span></p>
+      <p><strong>Transmission :</strong> <span id="transmission"></span></p>
+      <img id="voitureImage" src="" alt="Image du modèle" />
+    </div>
+    <label for="nom">Nom :</label>
+<input type="text" id="nom" name="nom" placeholder="Saisissez votre nom svp" required>
+
+<label for="prenom">Prénom :</label>
+<input type="text" id="prenom" name="prenom" placeholder="Saisissez votre prénom svp" required>
+
+<label for="telephone">Téléphone :</label>
+<input type="tel" id="telephone" name="telephone" placeholder="+225 0544979531" required>
+
+<label for="nationalite">Nationalité :</label>
+<input type="text" id="nationalite" name="nationalite" placeholder="Saisissez votre nationalité svp" required>
+
+<label for="sexe">Sexe :</label>
+<select id="sexe" name="sexe" required>
+  <option value="">Sélectionnez votre sexe</option>
+  <option value="Homme">Homme</option>
+  <option value="Femme">Femme</option>
+</select>
+
+
+    <button type="submit" class="btn">Commander</button>
+
+    <div class="actions">
+      <button type="reset" id="resetBtn" class="btn-secondary">Réinitialiser</button>
+      <a href="accueil.html" class="btn-secondary">Retour à l'accueil</a>
+    </div>
+  </form>
+
+  <div class="success-message" id="successMessage">
+    <h3>🎉 Commande envoyée avec succès !</h3>
+    <p id="recapCommande"></p>
+  </div>
+
+  <script>
+    const modeles = {
+      BMW: [
+  {
+    nom: "X6",
+    prix: "75 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/images (2).jpeg"
+  },
+  {
+    nom: "i8",
+    prix: "130 000 €",
+    carburant: "Hybride",
+    transmission: "manuelle",
+    image: "imag/images (1).jpeg"
+  },
+  {
+    nom: "M5",
+    prix: "120 000 €",
+    carburant: "Essence",
+    transmission: "Manuelle",
+    image: "imag/téléchargement (1).jpeg"
+  }
+]
+,
+      Mercedes: [
+        { nom: "Classe C", prix: "60 000 €", carburant: "Essence", transmission: "Automatique", image: "imag/5.jpg" },
+        { nom: "GLE", prix: "80 000 €", carburant: "Diesel", transmission: "Automatique", image: "imag/6.jpg" }
+      ],
+    Audi: [
+  {
+    nom: "A6",
+    prix: "58 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/11452734.png"
+  },
+  {
+    nom: "R8",
+    prix: "180 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/2150796904.jpg"
+  },
+  {
+    nom: "Q7",
+    prix: "70 000 €",
+    carburant: "Diesel",
+    transmission: "Automatique",
+    image: "imag/voiture-3d-avec-fond-simple.jpg"
+  },
+  {
+    nom: "A3",
+    prix: "42 000 €",
+    carburant: "Essence",
+    transmission: "Manuelle",
+    image: "imag/voiture-3d-avec-un-arriere-plan-minimal.jpg"
+  }
+],
+     Ferrari: [
+  {
+    nom: "Roma",
+    prix: "200 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/voiture-3d-aux-couleurs-vives.jpg"
+  },
+  {
+    nom: "SF90",
+    prix: "430 000 €",
+    carburant: "Hybride",
+    transmission: "Automatique",
+    image: "imag/vue-du-modele-de-voiture-3d (1).jpg"
+  },
+  {
+    nom: "812 Superfast",
+    prix: "350 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/vue-de-la-voiture-3d.jpg"
+  }
+]
+,
+    Lamborghini: [
+  {
+    nom: "Huracán",
+    prix: "250 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/une-voiture-de-sport-futuriste.jpg"
+  },
+  {
+    nom: "Urus",
+    prix: "220 000 €",
+    carburant: "Essence",
+    transmission: "Automatique",
+    image: "imag/vue-du-modele-de-voiture-3d.jpg"
+  },
+  {
+    nom: "Revuelto",
+    prix: "380 000 €",
+    carburant: "Hybride",
+    transmission: "Automatique",
+    image: "imag/vue-de-la-voiture-en-trois-dimensions.jpg"
+  },
+  {
+    nom: "Sian",
+    prix: "3 000 000 €",
+    carburant: "Hybride",
+    transmission: "Automatique",
+    image: "imag/une-voiture-de-sport-noire-futuriste.jpg"
+  }
+]
+,
+      Porsche: [
+        { nom: "911", prix: "125 000 €", carburant: "Essence", transmission: "Automatique", image: "imag/8.jpg" },
+        { nom: "Taycan", prix: "170 000 €", carburant: "Électrique", transmission: "Automatique", image: "imag/7.jpg" }
+      ],
+      Bentley: [
+        { nom: "Continental GT", prix: "230 000 €", carburant: "Essence", transmission: "Automatique", image: "imag/voiture-3d-aux-couleurs-vives.jpg" },
+        { nom: "Bentayga", prix: "190 000 €", carburant: "Essence", transmission: "manuelle", image: "imag/une-voiture-de-sport-futuriste.jpg" }
+      ],
+      "Rolls-Royce": [
+        { nom: "Ghost", prix: "280 000 €", carburant: "Essence", transmission: "Automatique", image: "imag/2.jpg" },
+        { nom: "Phantom", prix: "450 000 €", carburant: "Électrique", transmission: "Automatique", image: "imag/1.jpg" }
+
+      ],
+      Maserati: [
+        { nom: "Ghibli", prix: "90 000 €", carburant: "Essence", transmission: "Automatique", image: "imag/vue-du-modele-de-voiture-3d.jpg" },
+        { nom: "Levante", prix: "110 000 €", carburant: "Diesel", transmission: "Automatique", image: "imag/voiture-3d-avec-fond-simple.jpg" }
+      ],
+      McLaren: [
+        { nom: "Artura", prix: "210 000 €", carburant: "Hybride", transmission: "Automatique", image: "imag/4.jpg" },
+        { nom: "720S", prix: "300 000 €", carburant: "Essence", transmission: "manuelle", image: "imag/3.jpg" }
+      ]
+    };
+
+    const marqueSelect = document.getElementById("marque");
+    const modeleSelect = document.getElementById("modele");
+
+    marqueSelect.addEventListener("change", function () {
+      const marque = this.value;
+      modeleSelect.innerHTML = '<option value="">-- Choisissez un modèle --</option>';
+      if (modeles[marque]) {
+        modeles[marque].forEach((m) => {
+          const opt = document.createElement("option");
+          opt.value = m.nom;
+          opt.textContent = m.nom;
+          modeleSelect.appendChild(opt);
+        });
+      }
+      document.getElementById("details").style.display = "none";
+    });
+
+    modeleSelect.addEventListener("change", function () {
+      const marque = marqueSelect.value;
+      const modeleNom = this.value;
+      const modele = modeles[marque].find(m => m.nom === modeleNom);
+      if (modele) {
+        document.getElementById("nom-modele").textContent = modele.nom;
+        document.getElementById("prix").textContent = modele.prix;
+        document.getElementById("carburant").textContent = modele.carburant;
+        document.getElementById("transmission").textContent = modele.transmission;
+        document.getElementById("voitureImage").src = modele.image;
+        document.getElementById("details").style.display = "block";
+      }
+    });
+
+    document.getElementById("commandeForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
+      const telephone = document.getElementById("telephone").value;
+      const nationalite = document.getElementById("nationalite").value;
+      const sexe = document.getElementById("sexe").value;
+      const marque = document.getElementById("marque").value;
+      const modele = document.getElementById("modele").value;
+      const prix = document.getElementById("prix").textContent;
+      const carburant = document.getElementById("carburant").textContent;
+      const transmission = document.getElementById("transmission").textContent;
+
+      const recap = `
+        Merci <strong>${prenom} ${nom}</strong> pour votre commande !<br><br>
+        📞 Téléphone : ${telephone}<br>
+        🌍 Nationalité : ${nationalite}<br>
+        🧑 Sexe : ${sexe}<br><br>
+        🚗 Voiture : ${marque} ${modele}<br>
+        💶 Prix : ${prix}<br>
+        ⛽ Carburant : ${carburant}<br>
+        ⚙️ Transmission : ${transmission}<br>
+      `;
+
+      document.getElementById("recapCommande").innerHTML = recap;
+      document.getElementById("successMessage").style.display = "block";
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    // Réinitialiser = cacher messages + détails
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      document.getElementById("successMessage").style.display = "none";
+      document.getElementById("details").style.display = "none";
+    });
+  </script>
+</body>
+</html>

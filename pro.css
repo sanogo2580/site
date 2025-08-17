@@ -1,0 +1,159 @@
+/* Styles spécifiques à la page À propos */
+
+/* Corps et typographie */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px 15px;
+  background-color: #f9f9fa;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Navigation */
+nav.navbar {
+  background-color: #222;
+  padding: 12px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+nav.navbar a {
+  color: #eee;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav.navbar a:hover,
+nav.navbar a.active {
+  background-color: #f0c040;
+  color: #222;
+}
+
+/* Header Hero */
+header.hero {
+  background-color: #333;
+  color: white;
+  padding: 70px 15px 50px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+}
+
+header.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.3em;
+}
+
+header.hero p {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* Sections intro */
+section.intro {
+  background-color: white;
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+  padding: 30px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+section.intro h2 {
+  font-size: 2rem;
+  margin-bottom: 0.6em;
+  color: #111;
+}
+
+section.intro p {
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+}
+
+section.intro ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+section.intro ul li {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+/* Images dans les sections */
+section.intro img {
+  display: block;
+  max-width: 100%;
+  margin: 20px auto 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 22px 15px;
+  font-size: 0.95rem;
+  margin-top: 40px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav.navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav.navbar a {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+  }
+  
+  section.intro {
+    padding: 25px 20px;
+    margin-bottom: 30px;
+  }
+  
+  header.hero h1 {
+    font-size: 2rem;
+  }
+
+  header.hero p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    padding: 15px 10px;
+  }
+  
+  section.intro h2 {
+    font-size: 1.6rem;
+  }
+  
+  section.intro p, section.intro ul li {
+    font-size: 1rem;
+  }
+}
